@@ -1,0 +1,805 @@
+<body>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="./script/main.js"></script>
+
+        <link rel="stylesheet" href="./style/main.css">
+        <link rel="stylesheet" href="./style/style.css">
+
+        <title>Explore</title>
+        <style>
+            .button-cover {
+                height: 100px;
+                margin: 20px;
+                background-color: #fff;
+                box-shadow: 0 10px 20px -8px #c5d6d6;
+                border-radius: 4px;
+            }
+
+            .button-cover:before {
+                counter-increment: button-counter;
+                content: counter(button-counter);
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                color: #d7e3e3;
+                font-size: 12px;
+                line-height: 1;
+                padding: 5px;
+            }
+
+            .button-cover,
+            .knobs,
+            .layer {
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+            }
+
+            .button {
+                position: relative;
+                top: 50%;
+                width: 65px;
+                height: 25px;
+                margin: -20px auto 0 auto;
+                overflow: hidden;
+            }
+
+            .button.r,
+            .button.r .layer {
+                border-radius: 100px;
+            }
+
+            .button.b2 {
+                border-radius: 2px;
+            }
+
+            .checkbox {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                padding: 0;
+                margin: 0;
+                opacity: 0;
+                cursor: pointer;
+                z-index: 3;
+            }
+
+            .knobs {
+                z-index: 2;
+            }
+
+            .layer {
+                width: 100%;
+                background-color: #515150;
+                transition: 0.3s ease all;
+                z-index: 1;
+            }
+
+            /* Button 1 */
+            #button-1 .knobs:before {
+                content: '';
+                position: absolute;
+                position: absolute;
+                top: 5px;
+                left: 7px;
+                width: 16px;
+                height: 17px;
+                color: #fff;
+                font-size: 10px;
+                font-weight: bold;
+                text-align: center;
+                line-height: 1px;
+                padding: 2px 2px;
+                background-color: rgb(255, 193, 7);
+                border-radius: 50%;
+                transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
+            }
+
+            #button-1 .checkbox:checked+.knobs:before {
+                content: '';
+
+                left: 42px;
+                background-color: #717070;
+            }
+
+            #button-1 .checkbox:checked~.layer {
+                background-color: #b3b0b0;
+            }
+
+            #button-1 .knobs,
+            #button-1 .knobs:before,
+            #button-1 .layer {
+                transition: 0.3s ease all;
+            }
+
+            .catinput input {
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+                height: 2px;
+                width: 2px;
+                /* z-index: 3; */
+            }
+
+            .checkmark {
+
+                height: 1.3em;
+                width: 1.3em;
+                background: #606062;
+                border-radius: 7px;
+                box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.30), 0px 1px 1px rgba(0, 5);
+            }
+
+            /* When the checkbox is checked, add a blue background */
+            input:checked~.checkmark {
+                background-image: linear-gradient(#255CD2, #1D52C1)
+            }
+
+            /* Create the checkmark/indicator (hidden when not checked) */
+            .checkmark:after {
+                content: "";
+                position: relative;
+                display: none;
+            }
+
+            /* Show the checkmark when checked */
+            input:checked~.checkmark:after {
+                display: block;
+            }
+
+            /* Style the checkmark/indicator */
+            .checkmark:after {
+                left: 0.55em;
+                top: 0.3em;
+                width: 0.24em;
+                height: 0.6em;
+                border: solid white;
+                border-width: 0 0.15em 0.15em 0;
+                transform: rotate(45deg);
+            }
+
+            #filter {
+                display: none;
+            }
+
+            .confee {
+                font-size: 10px;
+            }
+
+            /* pricw range  */
+            .min-max label {
+                font-size: 14px;
+                float: left;
+                margin-right: 5px;
+                line-height: 1.6;
+            }
+
+            .min {
+                float: left;
+            }
+
+            .max {
+                float: right;
+            }
+
+            .min-max {
+                width: 90%;
+                max-width: 200px;
+                margin: 0 auto;
+                /* padding: 25px 0px 15px 0px;     */
+            }
+
+            .min-max span {
+                font-size: 13px;
+                text-align: center;
+                display: inline-block;
+                width: 44px;
+                border: 1px solid #ffc107;
+
+            }
+
+            .min-max {
+                padding-bottom: 30px;
+            }
+
+            .range {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 50%;
+                height: 10px;
+                max-width: 400px;
+                background-color: #3a3938;
+                margin: 0;
+                padding: 0;
+                outline: none;
+                float: left;
+            }
+
+            .range::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                background-color: #ffc107;
+                height: 10px;
+                width: 10px;
+                border-radius: 50%;
+                cursor: pointer;
+            }
+
+            .range::moz-range-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                background-color: #0070BF;
+                height: 10px;
+                width: 10px;
+                border-radius: 50%;
+                cursor: pointer;
+            }
+
+            .bg-warning {
+                background-color: #e16e31 !important;
+            }
+            .theam-text{
+            color: #e16e31;
+        }
+        </style>
+
+    </head>
+
+    <body>
+        <nav class="container   nav-bg shadow sticky-top ">
+            <ul class=' p-0 text-center row fs-3 ' style="list-style: none; ">
+                <li class='col p-0 '>
+                    <a href="./home.html"><i class="bi bi-house-door-fill"></i></a>
+                </li>
+                <li class='col p-0'>
+                    <a href="./exploer.html" class="activenav"><i class="bi bi-search"></i></a>
+                </li>
+                <li class='col p-0'>
+                    <a href="./notification.html"><i class="bi bi-bell-fill"></i></a>
+                </li>
+                <li class='col p-0'>
+                    <a href="./account.html">₹</a>
+                </li>
+                <li class='col p-0'>
+                    <a href="./profile.html"><i class="bi bi-person-fill"></i></a>
+                </li>
+            </ul>
+
+        </nav>
+        <div class="">
+            <div class="container p-3 position-fixed" style="top: 40px; background-color: #24242b ; z-index: 1; ">
+                <div class="position-relative">
+                    <input type="Text" class="bg-transparent rounded-pill text-white w-100  p-2 pe-5  fs-4"
+                        style="outline: none; border: 1px solid #ffc107;" placeholder="Search" name="" id="">
+                    <div>
+                        <p class="m-0 position-absolute fs-5 fw-bold theam-text" style="top: 15px; right:21px;"><i
+                                class="bi bi-search"></i></p>
+                    </div>
+                </div>
+
+                <div class=" bg-warning w-50  my-3 m-auto text-center text-dark p-1 rounded hover1 fw-bold" id="show">
+                    <p class="m-0 "><i class="bi bi-filter fs-4 "></i> Filter & Sort</p>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <section class="container  my-3" style="z-index: 12; padding-top: 133px;">
+            <div class=" row-cols-sm-2 row  justify-content-around gy-3">
+                <div class='col-sm-6  p-0'
+                    style=" background-color: #2f2e2e; width: 150px; border-radius: 10px 10px 10px 10px;  ">
+                    <div class='position-relative'>
+                        <a href="./listnerprofile.html">
+                            <img class='text-center w-100' style=" border-radius: 10px 10px 0px 0px; height: 10rem;"
+                                src="./img/index.jpg" alt="" /></a>
+
+                    </div>
+                    <div class='m-1 '>
+                        <div class="text-center">
+                            <p class=' fw-bold text-white m-0'>
+                                nandini </p>
+                            <div class='theam-text'>
+                                <span><i class="bi bi-star-fill"></i></span>
+                                <span><i class="bi bi-star-fill"></i></span>
+                                <span><i class="bi bi-star-fill"></i></span>
+                                <span><i class="bi bi-star-fill"></i></span>
+                                <span><i class="bi bi-star-fill"></i></span>
+                            </div>
+                            <div class='charges m-auto text-center' style="font-size: 15px; ">
+                                <p class='fw-bold m-0  m-auto '>Rs. 500/min</p>
+
+                            </div>
+                            <p class=" confee mx-1 m-0">Rs.50(convenience fee)</p>
+                        </div>
+
+                        <div class='bg-warning  text-center rounded' style=" height: 25px; width: 100%;padding: 1px; ">
+                            <p class="m-0 fw-bold" style="font-size: 15px; ">
+                                <a href="#" class="text-dark " data-bs-toggle="modal" data-bs-target="#minbal">Call Now <i
+                                        class=" text-dark bi bi-telephone-fill"></i></a>
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class='col-sm-6  p-0'
+                    style=" background-color: #2f2e2e; width: 150px; border-radius: 10px 10px 10px 10px;  ">
+                    <div class='position-relative'>
+                        <a href="./listnerprofile.html">
+                            <img class='text-center w-100' style=" border-radius: 10px 10px 0px 0px; height: 10rem;"
+                                src="./img/index.jpg" alt="" /></a>
+
+                    </div>
+                    <div class='m-1 '>
+                        <div class="text-center">
+                            <p class=' fw-bold text-white m-0'>
+                                nandini </p>
+                            <div class='theam-text'>
+                                <span><i class="bi bi-star-fill"></i></span>
+                                <span><i class="bi bi-star-fill"></i></span>
+                                <span><i class="bi bi-star-fill"></i></span>
+                                <span><i class="bi bi-star-fill"></i></span>
+                                <span><i class="bi bi-star-fill"></i></span>
+                            </div>
+                            <div class='charges m-auto text-center'>
+                                <p class='fw-bold m-0  m-auto ' style="font-size: 15px; ">Rs. 500/min</p>
+
+                            </div>
+                            <p class=" confee mx-1 m-0">Rs.50(convenience fee)</p>
+                        </div>
+
+                        <div class='bg-warning  text-center rounded' style=" height: 25px; width: 100%;padding: 1px; ">
+                            <p class="m-0 fw-bold" style="font-size: 15px; ">
+                                <a href="#" class="text-dark "  data-bs-toggle="modal" data-bs-target="#lowbal">Call Now <i
+                                        class=" text-dark bi bi-telephone-fill"></i></a>
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+                <div class='col-sm-6 p-0'
+                    style=" background-color: #2f2e2e; width: 150px; border-radius: 10px 10px 10px 10px;  ">
+                    <div class='position-relative'>
+                        <a href="./listnerprofile.html">
+                            <img class='text-center w-100' style=" border-radius: 10px 10px 0px 0px; height: 10rem;"
+                                src="./img/index.jpg" alt="" /></a>
+
+                    </div>
+                    <div class='m-1 '>
+                        <div class="text-center">
+                            <p class=' fw-bold text-white m-0'>
+                                nandini </p>
+                            <div class='theam-text'>
+                                <span><i class="bi bi-star-fill"></i></span>
+                                <span><i class="bi bi-star-fill"></i></span>
+                                <span><i class="bi bi-star-fill"></i></span>
+                                <span><i class="bi bi-star-fill"></i></span>
+                                <span><i class="bi bi-star-fill"></i></span>
+                            </div>
+                            <div class='charges m-auto text-center'>
+                                <p class='fw-bold m-0  m-auto ' style="font-size: 15px; ">Rs. 500/min</p>
+
+                            </div>
+                            <p class=" confee mx-1 m-0">Rs.50(convenience fee)</p>
+                        </div>
+
+                        <div class='bg-warning  text-center rounded' style=" height: 25px; width: 100%;padding: 1px; ">
+                            <p class="m-0 fw-bold" style="font-size: 15px; ">
+                                <a href="./calling.html" class="text-dark ">Call Now <i
+                                        class=" text-dark bi bi-telephone-fill"></i></a>
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+                <div class='col-sm-6 p-0'
+                    style=" background-color: #2f2e2e; width: 150px; border-radius: 10px 10px 10px 10px;  ">
+                    <div class='position-relative'>
+                        <a href="./listnerprofile.html">
+                            <img class='text-center w-100' style=" border-radius: 10px 10px 0px 0px; height: 10rem;"
+                                src="./img/index.jpg" alt="" /></a>
+
+                    </div>
+                    <div class='m-1 '>
+                        <div class="text-center">
+                            <p class=' fw-bold text-white m-0'>
+                                nandini </p>
+                            <div class='theam-text'>
+                                <span><i class="bi bi-star-fill"></i></span>
+                                <span><i class="bi bi-star-fill"></i></span>
+                                <span><i class="bi bi-star-fill"></i></span>
+                                <span><i class="bi bi-star-fill"></i></span>
+                                <span><i class="bi bi-star-fill"></i></span>
+                            </div>
+                            <div class='charges m-auto text-center'>
+                                <p class='fw-bold m-0  m-auto ' style="font-size: 15px; ">Rs. 500/min</p>
+
+                            </div>
+                            <p class=" confee mx-1 m-0">Rs.50(convenience fee)</p>
+                        </div>
+
+                        <div class='bg-warning  text-center rounded' style=" height: 25px; width: 100%;padding: 1px; ">
+                            <p class="m-0 fw-bold" style="font-size: 15px; ">
+                                <a href="./calling.html" class="text-dark ">Call Now <i
+                                        class=" text-dark bi bi-telephone-fill"></i></a>
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+                <div class='col-sm-6  p-0'
+                    style=" background-color: #2f2e2e; width: 150px; border-radius: 10px 10px 10px 10px;  ">
+                    <div class='position-relative'>
+                        <a href="./listnerprofile.html">
+                            <img class='text-center w-100' style=" border-radius: 10px 10px 0px 0px; height: 10rem;"
+                                src="./img/index.jpg" alt="" /></a>
+
+                    </div>
+                    <div class='m-1 '>
+                        <div class="text-center">
+                            <p class=' fw-bold text-white m-0'>
+                                nandini </p>
+                            <div class='theam-text'>
+                                <span><i class="bi bi-star-fill"></i></span>
+                                <span><i class="bi bi-star-fill"></i></span>
+                                <span><i class="bi bi-star-fill"></i></span>
+                                <span><i class="bi bi-star-fill"></i></span>
+                                <span><i class="bi bi-star-fill"></i></span>
+                            </div>
+                            <div class='charges m-auto text-center'>
+                                <p class='fw-bold m-0  m-auto ' style="font-size: 15px; ">Rs. 500/min</p>
+
+                            </div>
+                            <p class=" confee mx-1 m-0">Rs.50(convenience fee)</p>
+                        </div>
+
+                        <div class='bg-warning  text-center rounded' style=" height: 25px; width: 100%;padding: 1px; ">
+                            <p class="m-0 fw-bold" style="font-size: 15px; ">
+                                <a href="./calling.html" class="text-dark ">Call Now <i
+                                        class=" text-dark bi bi-telephone-fill"></i></a>
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+                <div class='col-sm-6  p-0'
+                    style=" background-color: #2f2e2e; width: 150px; border-radius: 10px 10px 10px 10px;  ">
+                    <div class='position-relative'>
+                        <a href="./listnerprofile.html">
+                            <img class='text-center w-100' style=" border-radius: 10px 10px 0px 0px; height: 10rem;"
+                                src="./img/index.jpg" alt="" /></a>
+
+                    </div>
+                    <div class='m-1 '>
+                        <div class="text-center">
+                            <p class=' fw-bold text-white m-0'>
+                                nandini </p>
+                            <div class='theam-text'>
+                                <span><i class="bi bi-star-fill"></i></span>
+                                <span><i class="bi bi-star-fill"></i></span>
+                                <span><i class="bi bi-star-fill"></i></span>
+                                <span><i class="bi bi-star-fill"></i></span>
+                                <span><i class="bi bi-star-fill"></i></span>
+                            </div>
+                            <div class='charges m-auto text-center'>
+                                <p class='fw-bold m-0  m-auto ' style="font-size: 15px; ">Rs. 500/min</p>
+
+                            </div>
+                            <p class=" confee mx-1 m-0">Rs.50(convenience fee)</p>
+                        </div>
+
+                        <div class='bg-warning  text-center rounded' style=" height: 25px; width: 100%;padding: 1px; ">
+                            <p class="m-0 fw-bold" style="font-size: 15px; ">
+                                <a href="./calling.html" class="text-dark ">Call Now <i
+                                        class=" text-dark bi bi-telephone-fill"></i></a>
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+                <div class='col-sm-6 p-0'
+                    style=" background-color: #2f2e2e; width: 150px; border-radius: 10px 10px 10px 10px;  ">
+                    <div class='position-relative'>
+                        <a href="./listnerprofile.html">
+                            <img class='text-center w-100' style=" border-radius: 10px 10px 0px 0px; height: 10rem;"
+                                src="./img/index.jpg" alt="" /></a>
+
+                    </div>
+                    <div class='m-1 '>
+                        <div class="text-center">
+                            <p class=' fw-bold text-white m-0'>
+                                nandini </p>
+                            <div class='theam-text'>
+                                <span><i class="bi bi-star-fill"></i></span>
+                                <span><i class="bi bi-star-fill"></i></span>
+                                <span><i class="bi bi-star-fill"></i></span>
+                                <span><i class="bi bi-star-fill"></i></span>
+                                <span><i class="bi bi-star-fill"></i></span>
+                            </div>
+                            <div class='charges m-auto text-center'>
+                                <p class='fw-bold m-0  m-auto ' style="font-size: 15px; ">Rs. 500/min</p>
+
+                            </div>
+                            <p class=" confee mx-1 m-0">Rs.50(convenience fee)</p>
+                        </div>
+
+                        <div class='bg-warning  text-center rounded' style=" height: 25px; width: 100%;padding: 1px; ">
+                            <p class="m-0 fw-bold" style="font-size: 15px; ">
+                                <a href="./calling.html" class="text-dark ">Call Now <i
+                                        class=" text-dark bi bi-telephone-fill"></i></a>
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+                <div class='col-sm-6 p-0'
+                    style=" background-color: #2f2e2e; width: 150px; border-radius: 10px 10px 10px 10px;  ">
+                    <div class='position-relative'>
+                        <a href="./listnerprofile.html">
+                            <img class='text-center w-100' style=" border-radius: 10px 10px 0px 0px; height: 10rem;"
+                                src="./img/index.jpg" alt="" /></a>
+
+                    </div>
+                    <div class='m-1 '>
+                        <div class="text-center">
+                            <p class=' fw-bold text-white m-0'>
+                                nandini </p>
+                            <div class='theam-text'>
+                                <span><i class="bi bi-star-fill"></i></span>
+                                <span><i class="bi bi-star-fill"></i></span>
+                                <span><i class="bi bi-star-fill"></i></span>
+                                <span><i class="bi bi-star-fill"></i></span>
+                                <span><i class="bi bi-star-fill"></i></span>
+                            </div>
+                            <div class='charges m-auto text-center'>
+                                <p class='fw-bold m-0  m-auto ' style="font-size: 15px;">Rs. 500/min</p>
+
+                            </div>
+                            <p class=" confee mx-1 m-0">Rs.50(convenience fee)</p>
+                        </div>
+
+                        <div class='bg-warning  text-center rounded' style=" height: 25px; width: 100%;padding: 1px; ">
+                            <p class="m-0 fw-bold" style="font-size: 15px; ">
+                                <a href="./calling.html" class="text-dark ">Call Now <i
+                                        class=" text-dark bi bi-telephone-fill"></i></a>
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <!-- Fillter and shorts -->
+
+        <div class="fands px-4 py-4 w-100 position-absolute " id="filter" style="top: 40px; z-index: 13;">
+            <div class="d-flex justify-content-between">
+                <p id="hide"><i class="bi bi-x-lg"></i></p>
+
+            </div>
+            <div>
+                <p class="theam-text fs-4">Type</p>
+                <div class="d-flex justify-content-between my-2">
+                    <div> Counseller</div>
+                    <div>
+                        <div class="button r " id="button-1">
+                            <input type="checkbox" class="checkbox">
+                            <div class="knobs"></div>
+                            <div class="layer"></div>
+                        </div>
+                    </div>
+                </div>
+                <p class="theam-text fs-4">Status</p>
+                <div class="d-flex justify-content-between my-2">
+                    <div>Live</div>
+                    <div>
+                        <div class="button r " id="button-1">
+                            <input type="checkbox" class="checkbox">
+                            <div class="knobs"></div>
+                            <div class="layer"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="d-flex justify-content-between my-2">
+                    <div>Free</div>
+                    <div>
+                        <div class="button r " id="button-1">
+                            <input type="checkbox" class="checkbox">
+                            <div class="knobs"></div>
+                            <div class="layer"></div>
+                        </div> 
+                    </div>
+                </div> -->
+            </div>
+            <div>
+                <p class="theam-text fs-4">Price</p>
+                <div class="min-max-range">
+                    <div class="min-max">
+                        <div class="min">
+                            <label>Min</label><span id="min-value"></span>
+                        </div>
+                        <div class="max">
+                            <label>Max</label><span id="max-value"></span>
+                        </div>
+                    </div>
+                    <input type="range" min="0" max="100" value="2000" class="range" id="min">
+                    <input type="range" min="101" max="500" value="8000" class="range" id="max">
+                </div>
+
+                <div class="catinput">
+                    <p class="theam-text fs-4 "> Categories</p>
+                    <div class="d-flex justify-content-between">
+                        <p> All</p>
+                        <div>
+                            <input type="checkbox">
+                            <div class="checkmark"></div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <p> Depression</p>
+                        </div>
+                        <div>
+                            <div>
+                                <input type="checkbox">
+                                <div class="checkmark"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <p>
+                                Carrer Pressure
+                            </p>
+                        </div>
+                        <div>
+                            <div>
+                                <input type="checkbox">
+                                <div class="checkmark"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <p>Relationship</p>
+                        </div>
+                        <div>
+                            <div>
+                                <input type="checkbox">
+                                <div class="checkmark"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <p>Health Crisis</p>
+                        </div>
+                        <div>
+                            <div>
+                                <input type="checkbox">
+                                <div class="checkmark"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <p>financial problem</p>
+                        </div>
+                        <div>
+                            <div>
+                                <input type="checkbox">
+                                <div class="checkmark"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <p>relationship problems</p>
+                        </div>
+                        <div>
+                            <div>
+                                <input type="checkbox">
+                                <div class="checkmark"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-warning text-center w-50 rounded p-2 m-auto">
+                    <p class="m-0">Apply Filter</p>
+                </div>
+            </div>
+</div>
+           
+            <script>
+                var minSlider = document.getElementById('min');
+                var maxSlider = document.getElementById('max');
+
+                var outputMin = document.getElementById('min-value');
+                var outputMax = document.getElementById('max-value');
+
+                outputMin.innerHTML = minSlider.value;
+                outputMax.innerHTML = maxSlider.value;
+
+                minSlider.oninput = function () {
+                    outputMin.innerHTML = this.value;
+                }
+
+                maxSlider.oninput = function () {
+                    outputMax.innerHTML = this.value;
+                }
+            </script>
+             <div class="modal fade" id="minbal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content w-75 m-auto" style="right: 13%; top:30vh;">
+                        
+                        <div class="modal-body dropdown">
+        
+                           
+                            <div>
+                                <p class="text-center fw-bold">
+                                   Your are using your minimum balance with this balance you will be able to talk nandani for <span>3 min </span> to make your experience smooth and disturbance free ,we advice you to reacharge teh wallet
+                                </p>
+                             
+                            </div>
+                        </div>
+                        <div class="modal-footer border-0 m-auto">
+                            
+                            <button type="button" class="btn border  border-warning">
+                               <a href="./account.html" class="text-white">Recharge</a> </button>
+                            <button type="button" data-bs-dismiss="modal" class="btn border-warning text-white">
+                                <a href="./calling.html">Call</a>
+                                </button>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="lowbal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content w-75 m-auto" style="right: 13%; top:30vh;">
+                        
+                        <div class="modal-body dropdown">
+        
+                           
+                            <div>
+                                <p class="text-center fw-bold">
+                                  <span class="text-danger"> Ooppss!</span> you don't have sufficient balance to make this call
+                                </p>
+                             
+                            </div>
+                        </div>
+                        <div class="modal-footer border-0 m-auto">
+                            
+                            <button type="button" class="btn border  border-warning">
+                               <a href="./account.html" class="text-white">Recharge</a> </button>
+                            
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script src="./script/main.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+                crossorigin="anonymous"></script>
+    </body>
+
+    </html>
+
+</body>
+
+</html>

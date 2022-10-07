@@ -1,0 +1,116 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    background-color: #24242b !important;
+    color: white;
+}
+
+.text-secondary {
+    color: #a2a2a2;
+}
+.nav-bg{
+    background-color: #515150;
+    border-radius: 0px 0px 3px 3px ;
+  }
+  nav{
+    z-index: 99;
+    
+  }
+  ::placeholder {
+    font-size: 15px;
+  }
+  a{
+      text-decoration: none;
+      color: white;
+  }
+  a:hover{
+    color: white;
+  }
+  a.activenav{
+    background-color: #24242b;
+    padding: 11% 34% ;
+    color: white;
+    width: 25%;
+  }
+  .nav-bg li{
+      height: 40px;
+      width: 25%;
+  }
+  .tags{
+      display: flex;
+      flex-wrap: wrap;
+  }
+  .tags span, .tags div{
+    background-color: #515150;
+    font-size: 10px;
+    }
+    .charges p{
+    color: #a07c40;
+    border-bottom: 2px solid #a07c40;
+    width: fit-content;
+    }
+    .fands{
+      background: linear-gradient(0deg,rgb(34, 34, 34) -17%
+      ,rgb(138, 137, 137) 114%);
+    }
+    .moreinfo{
+        display: none;
+      }
+      .dot:hover + .moreinfo {
+      display: flex;
+    
+     
+      }
+      .cat p{
+         background-color: rgb(76, 73, 73);
+      }
+      /* notification */
+      .info li:nth-child(odd){
+       
+        background-color: #515150;
+      }
+      .info li:nth-child(even){
+        background-color: #24242b;
+      }
+      .hover1:hover{
+        background-color: #cda817 !important;
+      }
+      @keyframes lefttoright {
+        0.0%{
+        transform-origin: top bottom;
+        transform: translate(0px,-200px);
+        /* opacity: 0; */
+        }
+        99.2%{
+        transform-origin: left right;
+        transform: translate(0px);
+        /* opacity: 1; */
+        }
+        }
+        .notifi li{
+          display: flex;
+        }
+        
+        .animel-t-r{
+        animation: lefttoright 1s ease 0s 1 normal none;
+        }
+        .tra>.active{
+background-color:#e16e31;
+        }
+
+        .accordion-button,.accordion-body{
+          background-color: #24242b !important;
+          color: white;
+        }
+        .accordion-button:focus{
+          color: white;
+          box-shadow: none;
+        }
+        
+        /* pop up modale */
+        
+      
+        

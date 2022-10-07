@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style/main.css">
+    <title>Callling</title>
+   <style>
+        .call-end{
+            background: #c92323;
+    padding: 10px;
+    border-radius: 50%;
+    height: 66px;
+    width: 63px;
+    line-height: 30px;
+    border: 7px solid #24242b;
+    top: -49%;
+    }
+    .rate {
+    /* float: left; */
+    height: 46px;
+    width:180px;
+    margin:auto;
+    padding: 0 10px;
+}
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:#ccc;
+}
+.rate:not(:checked) > label:before {
+    content: '★ ';
+}
+.rate > input:checked ~ label {
+    color: #ffc700;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #deb217;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+}
+   </style>
+</head>
+<body>
+    <div class="text-center mt-5">
+<p class="fs-3 fs-bold">Nijo jonson</p>
+<p class="fs-5">Connected</p>
+<p>
+    <span>00:</span>
+    <span>32:</span>
+    <span>12</span>
+</p>
+
+    </div>
+    <div class="d-flex fs-2 fands justify-content-around align-items-center fixed-bottom" style=" height: 100px;">
+        <div>
+            <p class="p-0 m-0"><i class="bi bi-mic-mute-fill"></i></p>
+        </div>
+        <div class="position-relative call-end" data-bs-toggle="modal" data-bs-target="#rating" ><i class="bi bi-telephone-fill"></i></div>
+        <div><i class="bi bi-volume-up"></i></div>
+
+    </div>
+    <!-- whene call ends user give rating to listner -->
+    <div class="modal fade" id="rating" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content w-75 m-auto" style="right: 13%; top:30vh;">
+                
+                <div class="modal-body dropdown">
+
+                   
+                    <div>
+                        <p class="text-center fw-bold">
+                            Rate Listner
+                            <!-- name of listner come here -->
+                        </p>
+                        <div class="rate">
+                            <input type="radio" id="star5" name="rate" value="5" />
+                            <label for="star5" title="text">5 stars</label>
+                            <input type="radio" id="star4" name="rate" value="4" />
+                            <label for="star4" title="text">4 stars</label>
+                            <input type="radio" id="star3" name="rate" value="3" />
+                            <label for="star3" title="text">3 stars</label>
+                            <input type="radio" id="star2" name="rate" value="2" />
+                            <label for="star2" title="text">2 stars</label>
+                            <input type="radio" id="star1" name="rate" value="1" />
+                            <label for="star1" title="text">1 star</label>
+                          </div>
+                     
+                    </div>
+                </div>
+                <div class="modal-footer border-0 m-auto">
+                    
+                    <button type="button" class="btn border  border-warning">
+                       <a href="./signup.html" class="text-danger">Cancel</a> </button>
+                    
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
+</body>
+</html>
